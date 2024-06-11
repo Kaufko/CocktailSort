@@ -1,4 +1,5 @@
-﻿Random random = new Random();
+using Plotly.NET;
+Random random = new Random();
 
 bool IsSorted(List<int> list, int size)
 {
@@ -52,5 +53,18 @@ List<int> CreateRandomList(int size)
     return list;
 }
 
-Sort(1000000);
+int siz = 1000;
 
+List<int> resultList = new List<int>();
+
+for(int i = 1; i < siz; i++)
+{
+    resultList.Add(Sort(i));
+}
+
+Plotly.NET.CSharp.Chart.Point<int, int, string>(
+    x: resultList,
+    y: Enumerable.Range(1, siz).ToList()
+)
+.WithTraceInfo("cocktail")
+.Show();
